@@ -1,16 +1,15 @@
-#!groovy
-import groovy.json.JsonSluperClassic
-node {
-
-    stage('checkout source') {
-
-        checkout scm
-    }
-
-       stage('print Hello') {
-
-         print "Hello World!\n"
-         print "Hi World!\n"
-
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker-compose build'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
     }
 }
